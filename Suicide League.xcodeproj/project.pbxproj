@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		165213CF1F2D3E3C00C41E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165213CE1F2D3E3C00C41E9B /* AppDelegate.swift */; };
+		165213D11F2D3E3C00C41E9B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165213D01F2D3E3C00C41E9B /* FirstViewController.swift */; };
+		165213D31F2D3E3C00C41E9B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165213D21F2D3E3C00C41E9B /* SecondViewController.swift */; };
+		165213D61F2D3E3C00C41E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 165213D41F2D3E3C00C41E9B /* Main.storyboard */; };
+		165213D81F2D3E3C00C41E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 165213D71F2D3E3C00C41E9B /* Assets.xcassets */; };
+		165213DB1F2D3E3C00C41E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 165213D91F2D3E3C00C41E9B /* LaunchScreen.storyboard */; };
+		165213E61F2D3E3C00C41E9B /* Suicide_LeagueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165213E51F2D3E3C00C41E9B /* Suicide_LeagueTests.swift */; };
+		165213F11F2D3E3C00C41E9B /* Suicide_LeagueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165213F01F2D3E3C00C41E9B /* Suicide_LeagueUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		165213E21F2D3E3C00C41E9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 165213C31F2D3E3C00C41E9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 165213CA1F2D3E3C00C41E9B;
+			remoteInfo = "Suicide League";
+		};
+		165213ED1F2D3E3C00C41E9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 165213C31F2D3E3C00C41E9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 165213CA1F2D3E3C00C41E9B;
+			remoteInfo = "Suicide League";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		165213CB1F2D3E3C00C41E9B /* Suicide League.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Suicide League.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		165213CE1F2D3E3C00C41E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		165213D01F2D3E3C00C41E9B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		165213D21F2D3E3C00C41E9B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		165213D51F2D3E3C00C41E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		165213D71F2D3E3C00C41E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		165213DA1F2D3E3C00C41E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		165213DC1F2D3E3C00C41E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		165213E11F2D3E3C00C41E9B /* Suicide LeagueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Suicide LeagueTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		165213E51F2D3E3C00C41E9B /* Suicide_LeagueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suicide_LeagueTests.swift; sourceTree = "<group>"; };
+		165213E71F2D3E3C00C41E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		165213EC1F2D3E3C00C41E9B /* Suicide LeagueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Suicide LeagueUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		165213F01F2D3E3C00C41E9B /* Suicide_LeagueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suicide_LeagueUITests.swift; sourceTree = "<group>"; };
+		165213F21F2D3E3C00C41E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		165213C81F2D3E3C00C41E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213DE1F2D3E3C00C41E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213E91F2D3E3C00C41E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		165213C21F2D3E3C00C41E9B = {
+			isa = PBXGroup;
+			children = (
+				165213CD1F2D3E3C00C41E9B /* Suicide League */,
+				165213E41F2D3E3C00C41E9B /* Suicide LeagueTests */,
+				165213EF1F2D3E3C00C41E9B /* Suicide LeagueUITests */,
+				165213CC1F2D3E3C00C41E9B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		165213CC1F2D3E3C00C41E9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				165213CB1F2D3E3C00C41E9B /* Suicide League.app */,
+				165213E11F2D3E3C00C41E9B /* Suicide LeagueTests.xctest */,
+				165213EC1F2D3E3C00C41E9B /* Suicide LeagueUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		165213CD1F2D3E3C00C41E9B /* Suicide League */ = {
+			isa = PBXGroup;
+			children = (
+				165213CE1F2D3E3C00C41E9B /* AppDelegate.swift */,
+				165213D01F2D3E3C00C41E9B /* FirstViewController.swift */,
+				165213D21F2D3E3C00C41E9B /* SecondViewController.swift */,
+				165213D41F2D3E3C00C41E9B /* Main.storyboard */,
+				165213D71F2D3E3C00C41E9B /* Assets.xcassets */,
+				165213D91F2D3E3C00C41E9B /* LaunchScreen.storyboard */,
+				165213DC1F2D3E3C00C41E9B /* Info.plist */,
+			);
+			path = "Suicide League";
+			sourceTree = "<group>";
+		};
+		165213E41F2D3E3C00C41E9B /* Suicide LeagueTests */ = {
+			isa = PBXGroup;
+			children = (
+				165213E51F2D3E3C00C41E9B /* Suicide_LeagueTests.swift */,
+				165213E71F2D3E3C00C41E9B /* Info.plist */,
+			);
+			path = "Suicide LeagueTests";
+			sourceTree = "<group>";
+		};
+		165213EF1F2D3E3C00C41E9B /* Suicide LeagueUITests */ = {
+			isa = PBXGroup;
+			children = (
+				165213F01F2D3E3C00C41E9B /* Suicide_LeagueUITests.swift */,
+				165213F21F2D3E3C00C41E9B /* Info.plist */,
+			);
+			path = "Suicide LeagueUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		165213CA1F2D3E3C00C41E9B /* Suicide League */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 165213F51F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide League" */;
+			buildPhases = (
+				165213C71F2D3E3C00C41E9B /* Sources */,
+				165213C81F2D3E3C00C41E9B /* Frameworks */,
+				165213C91F2D3E3C00C41E9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Suicide League";
+			productName = "Suicide League";
+			productReference = 165213CB1F2D3E3C00C41E9B /* Suicide League.app */;
+			productType = "com.apple.product-type.application";
+		};
+		165213E01F2D3E3C00C41E9B /* Suicide LeagueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 165213F81F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide LeagueTests" */;
+			buildPhases = (
+				165213DD1F2D3E3C00C41E9B /* Sources */,
+				165213DE1F2D3E3C00C41E9B /* Frameworks */,
+				165213DF1F2D3E3C00C41E9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				165213E31F2D3E3C00C41E9B /* PBXTargetDependency */,
+			);
+			name = "Suicide LeagueTests";
+			productName = "Suicide LeagueTests";
+			productReference = 165213E11F2D3E3C00C41E9B /* Suicide LeagueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		165213EB1F2D3E3C00C41E9B /* Suicide LeagueUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 165213FB1F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide LeagueUITests" */;
+			buildPhases = (
+				165213E81F2D3E3C00C41E9B /* Sources */,
+				165213E91F2D3E3C00C41E9B /* Frameworks */,
+				165213EA1F2D3E3C00C41E9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				165213EE1F2D3E3C00C41E9B /* PBXTargetDependency */,
+			);
+			name = "Suicide LeagueUITests";
+			productName = "Suicide LeagueUITests";
+			productReference = 165213EC1F2D3E3C00C41E9B /* Suicide LeagueUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		165213C31F2D3E3C00C41E9B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "d2i LLC";
+				TargetAttributes = {
+					165213CA1F2D3E3C00C41E9B = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 68AD879D23;
+						ProvisioningStyle = Automatic;
+					};
+					165213E01F2D3E3C00C41E9B = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 68AD879D23;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 165213CA1F2D3E3C00C41E9B;
+					};
+					165213EB1F2D3E3C00C41E9B = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 68AD879D23;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 165213CA1F2D3E3C00C41E9B;
+					};
+				};
+			};
+			buildConfigurationList = 165213C61F2D3E3C00C41E9B /* Build configuration list for PBXProject "Suicide League" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 165213C21F2D3E3C00C41E9B;
+			productRefGroup = 165213CC1F2D3E3C00C41E9B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				165213CA1F2D3E3C00C41E9B /* Suicide League */,
+				165213E01F2D3E3C00C41E9B /* Suicide LeagueTests */,
+				165213EB1F2D3E3C00C41E9B /* Suicide LeagueUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		165213C91F2D3E3C00C41E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165213DB1F2D3E3C00C41E9B /* LaunchScreen.storyboard in Resources */,
+				165213D81F2D3E3C00C41E9B /* Assets.xcassets in Resources */,
+				165213D61F2D3E3C00C41E9B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213DF1F2D3E3C00C41E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213EA1F2D3E3C00C41E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		165213C71F2D3E3C00C41E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165213D31F2D3E3C00C41E9B /* SecondViewController.swift in Sources */,
+				165213CF1F2D3E3C00C41E9B /* AppDelegate.swift in Sources */,
+				165213D11F2D3E3C00C41E9B /* FirstViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213DD1F2D3E3C00C41E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165213E61F2D3E3C00C41E9B /* Suicide_LeagueTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		165213E81F2D3E3C00C41E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165213F11F2D3E3C00C41E9B /* Suicide_LeagueUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		165213E31F2D3E3C00C41E9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 165213CA1F2D3E3C00C41E9B /* Suicide League */;
+			targetProxy = 165213E21F2D3E3C00C41E9B /* PBXContainerItemProxy */;
+		};
+		165213EE1F2D3E3C00C41E9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 165213CA1F2D3E3C00C41E9B /* Suicide League */;
+			targetProxy = 165213ED1F2D3E3C00C41E9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		165213D41F2D3E3C00C41E9B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165213D51F2D3E3C00C41E9B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		165213D91F2D3E3C00C41E9B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165213DA1F2D3E3C00C41E9B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		165213F31F2D3E3C00C41E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		165213F41F2D3E3C00C41E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		165213F61F2D3E3C00C41E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide League/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-League";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		165213F71F2D3E3C00C41E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide League/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-League";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		165213F91F2D3E3C00C41E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide LeagueTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-LeagueTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Suicide League.app/Suicide League";
+			};
+			name = Debug;
+		};
+		165213FA1F2D3E3C00C41E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide LeagueTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-LeagueTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Suicide League.app/Suicide League";
+			};
+			name = Release;
+		};
+		165213FC1F2D3E3C00C41E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide LeagueUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-LeagueUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Suicide League";
+			};
+			name = Debug;
+		};
+		165213FD1F2D3E3C00C41E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 68AD879D23;
+				INFOPLIST_FILE = "Suicide LeagueUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OFP.Suicide-LeagueUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Suicide League";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		165213C61F2D3E3C00C41E9B /* Build configuration list for PBXProject "Suicide League" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165213F31F2D3E3C00C41E9B /* Debug */,
+				165213F41F2D3E3C00C41E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		165213F51F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide League" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165213F61F2D3E3C00C41E9B /* Debug */,
+				165213F71F2D3E3C00C41E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		165213F81F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide LeagueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165213F91F2D3E3C00C41E9B /* Debug */,
+				165213FA1F2D3E3C00C41E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		165213FB1F2D3E3C00C41E9B /* Build configuration list for PBXNativeTarget "Suicide LeagueUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165213FC1F2D3E3C00C41E9B /* Debug */,
+				165213FD1F2D3E3C00C41E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 165213C31F2D3E3C00C41E9B /* Project object */;
+}
