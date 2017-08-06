@@ -8,6 +8,10 @@
 
 import UIKit
 
+var textFontBold:String = "Helvetica"
+var textFont:String = "Helvetica"
+var buttonBold:String = "Helvetica"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().toolbarManageBehaviour = IQAutoToolbarManageBehaviour.byTag
+        
+        let url:URL = URL(string: "http://suicideleague.com/v6/stub/Login.php")!
+        var request:URLRequest = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let bodyData = "username=johncederholm@gmail.com&password=johncederholm&remember_me=false"
+        request.httpBody = bodyData.data(using: .utf8)
+//        request.addValue("no-cache, must-revalidate", forHTTPHeaderField: "Cache-Control")
+//        request.addValue("Mon, 26 Jul 1997 05:00:00 GMT", forHTTPHeaderField: "Expires")
+        NSURLConnection.sendAsynchronousRequest(request, queue: .main, completionHandler: {response, data, error in
+//            print(response)
+//            print(data)
+//            print(error)
+//            let st = String(data: data!, encoding: String.Encoding.utf8)
+//            st
+//            print(String(data: data!, encoding: String.Encoding.utf8))
+        })
         return true
     }
 
