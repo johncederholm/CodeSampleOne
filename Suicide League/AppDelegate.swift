@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//let prefix = "http://suicideleague/v6/"
-let prefix = "http://localhost:8888/"
+let prefix = "http://suicideleague/v6/"
+//let prefix = "http://localhost:8888/"
 var textFontBold:String = "Helvetica"
 var textFont:String = "Helvetica"
 var buttonBold:String = "Helvetica"
