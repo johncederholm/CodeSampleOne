@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol LeagueControllerDelegate: class {
-    func typeOfLeague() -> LeagueType?
+    func selectedLeague() -> LeagueModel?
 }
 
 class LeagueController:ShadowController {
@@ -19,45 +19,74 @@ class LeagueController:ShadowController {
     @IBOutlet weak var leagueStandingsButton: UIButton!
     
     var delegate:LeagueControllerDelegate?
-    var leagues = [LeagueModel]()
-    override func viewDidLoad() {
-        createTest()
-        if let leagueType = delegate?.typeOfLeague() {
-            switch leagueType {
-            case .privateLeague:
-                topLabel.text = "Private League"
-            case .publicLeague:
-                topLabel.text = "Public League"
-            }
+    var teams:[TeamModel]?
+    var selectedTeam:TeamModel?
+    var league:LeagueModel {
+        get {
+            return delegate?.selectedLeague() ?? LeagueModel(name: "", type: .privateClassicLeague, lid: "")
         }
+    }
+    
+    
+    override func viewDidLoad() {
         leagueTableView.delegate = self
         leagueTableView.dataSource = self
         leagueStandingsButton.addTarget(self, action: #selector(LeagueController.standingsButton(sender:)), for: .touchUpInside)
     }
     
     deinit {
-        print("LeageControllerDeinit")
+        print("LeagueControllerDeinit")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setTable()
+    }
+    
+    func setTable() {
+        topLabel.text = delegate?.selectedLeague()?.name
+        guard let lid = self.delegate?.selectedLeague()?.lid else {return}
+        TeamAPI.getTeamObjects(UID: LoginAPI.shared.UID, LID:lid, completion: {teams in
+            self.teams = teams
+            DispatchQueue.main.async {
+                self.leagueTableView.reloadData()
+            }
+        })
+    }
+
     func standingsButton(sender:UIButton) {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeagueStandingsController") as? LeagueStandingsController else {return}
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func createTest() {
-        let testModel = LeagueModel(name: "Team1", type: .privateLeague, number: 0)
-        leagues = [testModel]
+        var ivc:String!
+        guard let type = delegate?.selectedLeague()?.type else {return}
+        switch type {
+        case .privateClassicLeague:
+            ivc = "LeagueStandingsController"
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ivc) as! LeagueStandingsController
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .privatePointsLeague:
+            ivc = "PointsController"
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ivc) as! PointsController
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .publicClassicLeague:
+            ivc = "LeagueStandingsController"
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ivc) as! LeagueStandingsController
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .publicPointsLeague:
+            ivc = "PointsController"
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ivc) as! PointsController
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
 extension LeagueController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? TeamCell {
-            cell.setCell(model: leagues[indexPath.row])
+            cell.setCell(model: (teams ?? [])[indexPath.section])
         }
     }
-    
-    
 }
 
 extension LeagueController:UITableViewDataSource {
@@ -66,7 +95,7 @@ extension LeagueController:UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return leagues.count
+        return (teams ?? []).count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -88,5 +117,38 @@ extension LeagueController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sec = indexPath.section
+        guard let teams = self.teams else {return}
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "WeekController") as? WeekController else {return}
+        selectedTeam = teams[sec]
+        if selectedTeam?.isOut == true {return}
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+}
+
+extension LeagueController:LeagueStandingsDelegate {
+    func leagueID(lc:LeagueStandingsController) -> String {
+        return delegate?.selectedLeague()?.lid ?? ""
+    }
+}
+
+extension LeagueController:PointsDelegate {
+    func leagueID(pc:PointsController) -> String {
+        return delegate?.selectedLeague()?.lid ?? ""
+    }
+}
+
+extension LeagueController:WeekControllerDelegate {
+    func getLeague() -> LeagueModel {
+        return self.league
+    }
+    
+    func getTeam() -> TeamModel {
+        return selectedTeam ?? TeamModel(name: "", id: "", isOut:false)
     }
 }

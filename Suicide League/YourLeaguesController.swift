@@ -10,47 +10,133 @@ import Foundation
 import UIKit
 
 class YourLeaguesController:ShadowController {
-    @IBOutlet weak var publicButton: LeagueButton!
-    @IBOutlet weak var privateButton: LeagueButton!
-    
+    @IBOutlet weak var leaguesTableView: UITableView!
     @IBOutlet weak var joinPrivate: UIButton!
     @IBOutlet weak var yourLeagueLabel: BottomBorderLabel!
     
-    var selectedType:LeagueType!
+    var leagueToPass:LeagueModel!
+    var leagues = [LeagueModel]()
+    var rightButton = UIBarButtonItem()
     
     override func viewDidLoad() {
-        publicButton.addTarget(self, action: #selector(YourLeaguesController.leagueButtonPress(sender:)), for: .touchUpInside)
-        privateButton.addTarget(self, action: #selector(YourLeaguesController.leagueButtonPress(sender:)), for: .touchUpInside)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "header"), for: .default)
+        leaguesTableView.delegate = self
+        leaguesTableView.dataSource = self
+        joinPrivate.addTarget(self, action: #selector(YourLeaguesController.joinLeague), for: .touchUpInside)
+        let rButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        rButton.setBackgroundImage(UIImage(named:"settings"), for: .normal)
+        rButton.backgroundColor = UIColor.clear
+        rButton.addTarget(self, action: #selector(YourLeaguesController.showOptions), for: .touchUpInside)
+        let rightButton = UIBarButtonItem(customView: rButton)
+        rightButton.action = #selector(YourLeaguesController.showOptions)
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if LoginAPI.shared.UID.isEmpty {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginController") as! LoginController
+            vc.delegate = self
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            self.setLeagues(UID:LoginAPI.shared.UID)
+        }
+//        LoginAPI.shared.login(username: "johncederholm", password: "iwakuni", completion: {response in
+//            
+//        })
+    }
+    
+    func showOptions() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OptionsController") as! OptionsController
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setLeagues(UID:String) {
+        LeagueAPI.getLeagueObjects(UID: UID, completion: {complete in
+            guard let complete = complete else {return}
+            self.leagues = complete
+            DispatchQueue.main.sync {
+                self.leaguesTableView.reloadData()
+            }
+        })
     }
     
     func leagueButtonPress(sender: LeagueButton) {
-        guard let leagueType = sender.leagueType else {return}
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeagueController") as? LeagueController else {return}
         vc.delegate = self
-        self.selectedType = leagueType
         self.navigationController?.pushViewController(vc, animated: true)
-        var newRequest = URL(string: "http://suicideleague.com/v6/ShowTeamAndMakePicks.php")!
-        var newR = URLRequest(url: newRequest)
-        newR.httpMethod = "POST"
-        let bd = "ShowTID=39676&ShowUID=25533&ShowLID=15046"
-        newR.httpBody = bd.data(using: .utf8)
-        NSURLConnection.sendAsynchronousRequest(newR, queue: .main, completionHandler: {r, d, e in
-            let xml:String = String(data: d!, encoding: String.Encoding.utf8)
-            do {
-                let document = try XMLDocument(string: xml)
-                if let root = document.root {
-                    for element in root.children {
-                        print("\(element.tag): \(element.attributes)")
-                    }
-                }
-            }
-        })
+    }
+    
+    func joinLeague() {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "JoinLeagueController") as? JoinLeagueController else {return}
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension YourLeaguesController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+}
+
+extension YourLeaguesController:UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return leagues.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueCell") {return cell}
+        return UITableViewCell()
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? LeagueCell {
+            cell.setCell(league:leagues[indexPath.section])
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let backView = UIView()
+        backView.backgroundColor = UIColor.clear
+        return backView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ivc = "LeagueController"
+        if let lc = self.storyboard?.instantiateViewController(withIdentifier: ivc) as? LeagueController {
+            self.leagueToPass = self.leagues[indexPath.section]
+            lc.delegate = self
+            self.navigationController?.pushViewController(lc, animated: true)
+        }
     }
 }
 
 extension YourLeaguesController:LeagueControllerDelegate {
-    func typeOfLeague() -> LeagueType? {
-        guard let leagueType = self.selectedType else {return nil}
-        return leagueType
+    func selectedLeague() -> LeagueModel? {
+        guard let sl = self.leagueToPass else {return nil}
+        return sl
+    }
+}
+
+extension YourLeaguesController:JoinLeagueDelegate {
+    
+}
+
+extension YourLeaguesController:LoginControllerDelegate {
+    func wasLoggedIn(controller: LoginController) {
+        self.leaguesTableView.reloadData()
+    }
+}
+
+extension YourLeaguesController:OptionsDelegate {
+    func didLogout() {
+        self.leaguesTableView.reloadData()
     }
 }

@@ -14,7 +14,15 @@ class TeamCell:UITableViewCell {
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var pickLabel: UILabel!
     
-    func setCell(model:LeagueModel) {
-        
+    func setCell(model:TeamModel) {
+        self.teamLabel.text = model.name
+        self.pickLabel.text = "Make pick"
+        if model.isOut {
+            self.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+            self.typeImage.image = UIImage(named: "out")
+        } else {
+            self.backgroundColor = UIColor(red: 0, green: 0.196078, blue: 0, alpha: 1.0)
+            self.typeImage.image = UIImage(named: "football")
+        }
     }
 }

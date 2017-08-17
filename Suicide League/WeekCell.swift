@@ -9,26 +9,57 @@
 import Foundation
 import UIKit
 
+enum WeekSide {
+    case left
+    case right
+}
+
+protocol WeekCellDelegate:class {
+    func didSelect(button cell:WeekCell, team:String)
+}
+
 class WeekCell:UITableViewCell {
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var leftTopColor: UIView!
     @IBOutlet weak var leftBottomColor: UIView!
-    @IBOutlet weak var leftCityLabel: UILabel!
-    @IBOutlet weak var leftNameLabel: UILabel!
+    @IBOutlet weak var leftTeamLabel: UILabel!
     @IBOutlet weak var dateLabel: SideBorderLabel!
     @IBOutlet weak var rightTopColor: UIView!
     @IBOutlet weak var rightBottomColor: UIView!
-    @IBOutlet weak var rightCityLabel: UILabel!
-    @IBOutlet weak var rightNameLabel: UILabel!
+    @IBOutlet weak var rightTeamLabel: UILabel!
     
-    func setCell(model:WeekModel) {
+    var delegate:WeekCellDelegate?
+    var week:WeekModel?
+    func setCell(model:WeekModel, pick:PickModel?) {
+        self.week = model
         leftTopColor.backgroundColor = model.leftTeamColors.first
         leftBottomColor.backgroundColor = model.leftTeamColors.last
-        leftCityLabel.text = model.leftTeamCity
-        leftNameLabel.text = model.leftTeamName
-        dateLabel.text = "@" + model.date + "\n" + model.time
+        leftTeamLabel.text = model.leftTeamName
+        dateLabel.text = "@" + "\n" + model.date + "\n" + model.time + " est"
         rightTopColor.backgroundColor = model.rightTeamColors.first
         rightBottomColor.backgroundColor = model.rightTeamColors.last
-        rightCityLabel.text = model.rightTeamCity
-        rightNameLabel.text = model.rightTeamName
+        rightTeamLabel.text = model.rightTeamName
+        leftButton.addTarget(self, action: #selector(WeekCell.leftSelect(sender:)), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(WeekCell.rightSelect(sender:)), for: .touchUpInside)
+        leftTeamLabel.backgroundColor = UIColor.clear
+        rightTeamLabel.backgroundColor = UIColor.clear
+        if let pick = pick {
+            if pick.teamNumber == model.leftN {
+                leftTeamLabel.backgroundColor = UIColor.red
+            } else if pick.teamNumber == model.rightN {
+                rightTeamLabel.backgroundColor = UIColor.red
+            }
+        }
+    }
+    
+    func leftSelect(sender:AnyObject) {
+        guard let team = week?.leftN else {return}
+        delegate?.didSelect(button: self, team: team)
+    }
+    
+    func rightSelect(sender:AnyObject) {
+        guard let team = week?.rightN else {return}
+        delegate?.didSelect(button: self, team: team)
     }
 }

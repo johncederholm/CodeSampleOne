@@ -10,23 +10,23 @@ import Foundation
 import UIKit
 
 class WeekModel {
-    var leftTeamCity:String
     var leftTeamName:String
     var leftTeamColors:[UIColor]
+    var leftN:String
     var date:String
     var time:String
-    var rightTeamCity:String
     var rightTeamName:String
     var rightTeamColors:[UIColor]
+    var rightN:String
     
-    init(ltc:String,ltn:String,lc:[UIColor],d:String,t:String,rtc:String,rtn:String,rc:[UIColor]) {
-        self.leftTeamCity = ltc
+    init(ltn:String,lc:[UIColor],d:String,t:String,rtn:String,rc:[UIColor],ln:String,rn:String) {
         self.leftTeamName = ltn
         self.leftTeamColors = lc
         self.date = d
         self.time = t
-        self.rightTeamCity = rtc
         self.rightTeamName = rtn
         self.rightTeamColors = rc
+        self.leftN = ln
+        self.rightN = rn
     }
 }

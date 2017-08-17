@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 enum LeagueType:String {
-    case privateLeague = "private"
-    case publicLeague = "public"
+    case privateClassicLeague = "privateClassic"
+    case privatePointsLeague = "privatePoints"
+    case publicClassicLeague = "publicClassic"
+    case publicPointsLeague = "publicPoints"
 }
 
 class LeagueButton:UIButton {

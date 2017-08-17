@@ -9,12 +9,12 @@
 import Foundation
 
 class LeagueModel {
-    var name: String
-    var number:Int
-    var type: LeagueType
-    init(name:String, type:LeagueType, number:Int) {
+    var name:String
+    var lid:String
+    var type:LeagueType
+    init(name:String, type:LeagueType, lid:String) {
         self.name = name
         self.type = type
-        self.number = number
+        self.lid = lid
     }
 }

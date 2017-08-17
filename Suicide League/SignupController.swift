@@ -20,6 +20,57 @@ class SignupController:ShadowController {
         submitButton.clipsToBounds = true
         submitButton.layer.cornerRadius = 6
         closeButton.addTarget(self, action: #selector(SignupController.closeController(sender:)), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(SignupController.goToSignup(sender:)), for: .touchUpInside)
+    }
+    
+    func goToSignup(sender:AnyObject) {
+        guard let password = passwordField.text else {noPassword();return}
+        guard let name = usernameField.text else {noUsername();return}
+        guard let email = emailField.text else {noEmail();return}
+        SignupAPI.signup(username: name, password: password, email:email, completion: {done in
+            DispatchQueue.main.async {
+                if done == "Success" {
+                    self.success()
+                    KCModel.setInfo(username: name, password: password)
+                    return
+                } else {
+                    self.error(message: done ?? "Error")
+                    return
+                }
+            }
+        })
+    }
+    
+    func noPassword() {
+        let alert = UIAlertController(title: "No Password", message: "Check your password and try again.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func noEmail() {
+        let alert = UIAlertController(title: "No Email", message: "Check your email and try again.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func noUsername() {
+        let alert = UIAlertController(title: "No Username", message: "Check your username and try again.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func success() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func error(message:String) {
+        let alert = UIAlertController(title: message, message: "Check your info and try again.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func closeController(sender: AnyObject) {
