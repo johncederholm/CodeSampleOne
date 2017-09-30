@@ -19,7 +19,12 @@ class YourLeaguesController:ShadowController {
     var rightButton = UIBarButtonItem()
     
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "header"), for: .default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"header")?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: UIBarPosition.top, barMetrics: .default)
+        let logoTitle = UIImageView(image: UIImage(named:"hLogo"))
+        logoTitle.frame.size.height = 44
+        logoTitle.backgroundColor = UIColor.red
+        logoTitle.contentMode = .scaleAspectFit
+        
         leaguesTableView.delegate = self
         leaguesTableView.dataSource = self
         joinPrivate.addTarget(self, action: #selector(YourLeaguesController.joinLeague), for: .touchUpInside)
@@ -34,15 +39,18 @@ class YourLeaguesController:ShadowController {
     
     override func viewDidAppear(_ animated: Bool) {
         if LoginAPI.shared.UID.isEmpty {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginController") as! LoginController
-            vc.delegate = self
-            self.present(vc, animated: true, completion: nil)
+            self.leagues = []
+            self.leaguesTableView.reloadData()
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginController") as? UINavigationController {
+                self.present(vc, animated: true, completion: {done in
+                    if let lvc = vc.viewControllers[0] as? LoginController {
+                        lvc.delegate = self
+                    }
+                })
+            }
         } else {
             self.setLeagues(UID:LoginAPI.shared.UID)
         }
-//        LoginAPI.shared.login(username: "johncederholm", password: "iwakuni", completion: {response in
-//            
-//        })
     }
     
     func showOptions() {
@@ -52,10 +60,12 @@ class YourLeaguesController:ShadowController {
     }
     
     func setLeagues(UID:String) {
+        self.showLoadingScreen()
         LeagueAPI.getLeagueObjects(UID: UID, completion: {complete in
-            guard let complete = complete else {return}
-            self.leagues = complete
             DispatchQueue.main.sync {
+                self.removeLoadingScreen()
+                guard let complete = complete else {return}
+                self.leagues = complete
                 self.leaguesTableView.reloadData()
             }
         })

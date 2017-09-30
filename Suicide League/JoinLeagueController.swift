@@ -38,18 +38,19 @@ class JoinLeagueController:ShadowController {
             p = pword
         }
         LeagueAPI.joinLeague(UID: u, LID: n, teamName: tn, password: p, completion: {done in
-            print(done)
-            if done == "good" {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                guard let response = done.1 else {self.errorMessage();return}
+                switch response {
+                case .success:
                     self.successMessage()
-                }
-            } else if done == "exists" {
-                DispatchQueue.main.async {
+                    _ = self.navigationController?.popViewController(animated: true)
+                    return
+                case .teamExists:
                     self.teamNameTaken()
-                }
-            } else {
-                DispatchQueue.main.async {
+                    return
+                default:
                     self.errorMessage()
+                    return
                 }
             }
         })

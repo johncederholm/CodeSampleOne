@@ -18,6 +18,9 @@ class PointsCell:UITableViewCell {
         if let rank = model.rank {
             self.rankLabel.text = "\(rank)"
         }
+        if model.isSelf {
+            self.nameLabel.font = UIFont(name:textFontBold, size: 15.0)
+        }
         self.nameLabel.text = model.name
         self.pointsLabel.text = model.score
     }

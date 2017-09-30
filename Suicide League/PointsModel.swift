@@ -12,8 +12,10 @@ class PointsModel {
     var name:String
     var score:String
     var rank:Int?
-    init(name:String, score:String) {
+    var isSelf:Bool
+    init(name:String, score:String, isSelf:Bool) {
         self.name = name
         self.score = score
+        self.isSelf = isSelf
     }
 }

@@ -16,7 +16,12 @@ class TeamCell:UITableViewCell {
     
     func setCell(model:TeamModel) {
         self.teamLabel.text = model.name
-        self.pickLabel.text = "Make pick"
+        if model.isPicked {
+            let tm = model.teamName ?? ""
+            self.pickLabel.text = "Change pick" + " - " + tm
+        } else {
+            self.pickLabel.text = "Make a pick"
+        }
         if model.isOut {
             self.backgroundColor = UIColor.red.withAlphaComponent(0.5)
             self.typeImage.image = UIImage(named: "out")

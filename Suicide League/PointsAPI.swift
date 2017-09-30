@@ -15,18 +15,23 @@ class PointsAPI {
         request.httpMethod = "POST"
         let bodyData = "LID=\(LID)"
         request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {return}
+        FailableTask.run(u: url, mt: "POST", b: bodyData, r: 3, s: URLSession.shared, suc: {data in
             guard let results = Serializer.serializeDataArray(data: data).completion else {return}
             var points = [PointsModel]()
             for result in results {
                 guard let name = result["teamName"] as? String else {continue}
                 guard let score = result["score"] as? String else {continue}
-                points.append(PointsModel(name: name, score: score))
+                guard let uid = result["userID"] as? String else {continue}
+                var isSelf = false
+                if uid == LoginAPI.shared.UID {
+                    isSelf = true
+                }
+                points.append(PointsModel(name: name, score: score, isSelf: isSelf))
             }
             return completion(createRanks(points: points))
+        }, fa: {failure in
+            completion([])
         })
-        task.resume()
     }
     
     class func createRanks(points:[PointsModel]) -> [PointsModel] {
@@ -54,17 +59,20 @@ class PointsAPI {
         request.httpMethod = "POST"
         let bodyData = "LID=\(lid)"
         request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {completion([]);return}
-            print(String.init(data: data, encoding: .utf8))
+        FailableTask.run(u: url, mt: "POST", b: bodyData, r: 3, s: URLSession.shared, suc: {data in
             guard let results = Serializer.serializeDataArray(data: data).completion else {completion([]);return}
             var standings = [StandingsModel]()
             var ins = [String]()
             var outs = [String]()
+            var teamNames = [String]()
             var outIndex = 0
             for result in results {
                 guard let name = result["teamName"] as? String else {continue}
                 guard let isIn = result["active"] as? String else {continue}
+                guard let uid = result["userID"] as? String else {continue}
+                if uid == LoginAPI.shared.UID {
+                    teamNames.append(name)
+                }
                 if isIn == "1" {
                     outs.append(name)
                 } else if isIn == "0" {
@@ -74,36 +82,67 @@ class PointsAPI {
             if ins.count > outs.count {
                 for inName in ins {
                     var outName:String? = nil
+                    var outIsSelf:Bool? = nil
                     if outs.indices.contains(outIndex) {
                         outName = outs[outIndex]
                         outIndex += 1
+                        if let outName = outName {
+                            if teamNames.contains(outName) {
+                                outIsSelf = true
+                            }
+                        }
                     }
-                    let standing = StandingsModel(inTeamName: inName, outTeamName: outName)
+                    var inIsSelf = false
+                    if teamNames.contains(inName) {
+                        inIsSelf = true
+                    }
+                    let standing = StandingsModel(inTeamName: (inName, inIsSelf), outTeamName: (outName, outIsSelf))
                     standings.append(standing)
                 }
             } else if ins.count < outs.count {
                 for outName in outs {
                     var inName:String? = nil
+                    var inIsSelf:Bool? = nil
                     if ins.indices.contains(outIndex) {
                         inName = ins[outIndex]
                         outIndex += 1
+                        if let inName = inName {
+                            if teamNames.contains(inName) {
+                                inIsSelf = true
+                            }
+                        }
                     }
-                    let standing = StandingsModel(inTeamName: inName, outTeamName: outName)
+                    var outIsSelf = false
+                    if teamNames.contains(outName) {
+                        outIsSelf = true
+                    }
+                    let standing = StandingsModel(inTeamName: (inName, inIsSelf), outTeamName: (outName, outIsSelf))
                     standings.append(standing)
                 }
             } else {
                 for inName in ins {
                     var outName:String? = nil
+                    var outIsSelf:Bool? = nil
                     if outs.indices.contains(outIndex) {
                         outName = outs[outIndex]
                         outIndex += 1
+                        if let outName = outName {
+                            if teamNames.contains(outName) {
+                                outIsSelf = true
+                            }
+                        }
                     }
-                    let standing = StandingsModel(inTeamName: inName, outTeamName: outName)
+                    var inIsSelf = false
+                    if teamNames.contains(inName) {
+                        inIsSelf = true
+                    }
+                    let standing = StandingsModel(inTeamName: (inName, inIsSelf), outTeamName: (outName, outIsSelf))
                     standings.append(standing)
                 }
             }
             return completion(standings)
+        }, fa: {failure in
+            completion([])
         })
-        task.resume()
     }
 }

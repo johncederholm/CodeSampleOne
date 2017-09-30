@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class ShadowController:UIViewController {
+    var loadingScreen:UIView!
     var shadowView:UIView!
     var shadowSize:CGFloat {
         get {
@@ -22,7 +23,7 @@ class ShadowController:UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillLayoutSubviews() {
         applyShadows()
     }
     
@@ -47,5 +48,41 @@ class ShadowController:UIViewController {
         let width = shadowView.bounds.width
         let height = shadowView.bounds.height
         shadowView.layer.shadowPath = CGPath(rect: CGRect(x: x, y: y, width: width, height: height), transform: nil)
+    }
+    
+    func showLoadingScreen() {
+        if loadingScreen != nil {return}
+        let useBounds = self.navigationController?.view.bounds ?? self.view.bounds
+        let width = useBounds.width
+        loadingScreen = UIView()
+        loadingScreen.frame = useBounds
+        loadingScreen.backgroundColor = UIColor.clear
+        let backgroundView = UIView()
+        backgroundView.frame.size = CGSize(width: width / 3, height: width / 3)
+        backgroundView.center = CGPoint(x: width / 2, y: width / 2)
+        backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        backgroundView.layer.cornerRadius = 10
+        backgroundView.layer.masksToBounds = true
+        let loadingView = NVActivityIndicatorView(frame: backgroundView.bounds,
+                                                  type: .ballClipRotateMultiple,
+                                                  color: UIColor.white,
+                                                  padding: backgroundView.bounds.width / 6)
+        loadingView.startAnimating()
+        (self.navigationController?.view ?? self.view).addSubview(loadingScreen)
+        loadingScreen.addSubview(backgroundView)
+        backgroundView.addSubview(loadingView)
+    }
+    
+    func removeLoadingScreen() {
+        if loadingScreen == nil {return}
+        UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
+            for view in self.loadingScreen.subviews {
+                view.alpha = 0
+            }
+            self.view.layoutIfNeeded()
+        }, completion: {done in
+            self.loadingScreen?.removeFromSuperview()
+            self.loadingScreen = nil
+        })
     }
 }

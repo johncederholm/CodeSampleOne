@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
 
 protocol LeagueControllerDelegate: class {
     func selectedLeague() -> LeagueModel?
@@ -17,7 +18,10 @@ class LeagueController:ShadowController {
     @IBOutlet weak var topLabel: BottomBorderLabel!
     @IBOutlet weak var leagueTableView: UITableView!
     @IBOutlet weak var leagueStandingsButton: UIButton!
+//    @IBOutlet weak var adBanner: GADBannerView!
     
+    var interstitial:GADInterstitial!
+    var showInterstitial:Bool = true
     var delegate:LeagueControllerDelegate?
     var teams:[TeamModel]?
     var selectedTeam:TeamModel?
@@ -29,25 +33,44 @@ class LeagueController:ShadowController {
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         leagueTableView.delegate = self
         leagueTableView.dataSource = self
         leagueStandingsButton.addTarget(self, action: #selector(LeagueController.standingsButton(sender:)), for: .touchUpInside)
-    }
-    
-    deinit {
-        print("LeagueControllerDeinit")
+//        adBanner.adUnitID = testAd
+//        adBanner.adUnitID = adString
+//        adBanner.rootViewController = self
+//        adBanner.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setTable()
+        determineAd()
+    }
+    
+    func determineAd() {
+        if self.showInterstitial {
+            createAd()
+        } else {
+            self.showInterstitial = true
+        }
+    }
+    
+    func createAd() {
+        interstitial = GADInterstitial(adUnitID: realInterstitial)
+//        interstitial = GADInterstitial(adUnitID: testInterstitial)
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
     }
     
     func setTable() {
         topLabel.text = delegate?.selectedLeague()?.name
         guard let lid = self.delegate?.selectedLeague()?.lid else {return}
+        self.showLoadingScreen()
         TeamAPI.getTeamObjects(UID: LoginAPI.shared.UID, LID:lid, completion: {teams in
-            self.teams = teams
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
+                self.removeLoadingScreen()
+                self.teams = teams
                 self.leagueTableView.reloadData()
             }
         })
@@ -149,6 +172,20 @@ extension LeagueController:WeekControllerDelegate {
     }
     
     func getTeam() -> TeamModel {
-        return selectedTeam ?? TeamModel(name: "", id: "", isOut:false)
+        return selectedTeam ?? TeamModel(name: "", id: "", isOut:false, isPicked:false, currentWeek: "1", teamName:nil)
+    }
+}
+
+extension LeagueController: GADInterstitialDelegate {
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        interstitial.present(fromRootViewController: self)
+    }
+    
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        
+    }
+    
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+        self.showInterstitial = false
     }
 }

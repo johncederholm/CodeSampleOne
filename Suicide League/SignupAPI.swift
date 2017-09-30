@@ -18,36 +18,36 @@ enum SignupResponse:String {
 }
 
 class SignupAPI {
-    class func signup(username:String, password:String, email:String, completion: @escaping (String?) -> ()) {
-        let url:URL = URL(string: prefix + "MobileSignUp.php")!
+    class func signup(username:String, password:String, email:String, completion: @escaping (SignupResponse?, String?) -> ()) {
+        let url:URL = URL(string: prefix + "MobileSignup.php")!
         var request:URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         let bodyData = "username=\(username)&password=\(password)&email=\(email)"
         request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {completion(nil); return}
+        FailableTask.run(u: url, mt: "POST", b: bodyData, r: 3, s: URLSession.shared, suc: {data in
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    print(json)
-                    guard let response = json["response"] as? String else {completion(nil);return}
+                    guard let response = json["response"] as? String else {completion(nil, nil);return}
                     let r = SignupResponse(rawValue: response) ?? SignupResponse.other
+                    var mess:String?
                     switch r {
-                    case .invalidEmail: completion("Invalid Email")
-                    case .nameTaken: completion("Name Taken")
-                    case .noPostData: completion("Try again")
-                    case .other: completion("Try Again")
-                    case .success: completion("Success")
+                    case .invalidEmail: mess = "Invalid Email"
+                    case .nameTaken: mess = "Name Taken"
+                    case .noPostData: mess = "Try again"
+                    case .other: mess = "Try Again"
+                    case .success: mess = "Success"
                     }
+                    completion(r, mess)
                     return
                 } else {
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
             } catch {
-                completion(nil)
-                print(error.localizedDescription)
+                completion(nil, nil)
             }
+        }, fa: {failure in
+            completion(nil, nil)
         })
-        task.resume()
     }
 }

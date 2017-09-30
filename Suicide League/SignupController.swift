@@ -9,32 +9,54 @@
 import Foundation
 import UIKit
 
+protocol SignupDelegate:class {
+    func didSignup(username:String, password:String)
+}
+
 class SignupController:ShadowController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var navBar: UINavigationItem!
+    
+    var delegate:SignupDelegate?
+    typealias SignupInfo = (username:String?, password:String?)
+    var signupInfo = SignupInfo(username: nil, password: nil)
     
     override func viewDidLoad() {
         submitButton.clipsToBounds = true
         submitButton.layer.cornerRadius = 6
         closeButton.addTarget(self, action: #selector(SignupController.closeController(sender:)), for: .touchUpInside)
         submitButton.addTarget(self, action: #selector(SignupController.goToSignup(sender:)), for: .touchUpInside)
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    deinit {
+        if let username = signupInfo.username, let password = signupInfo.password {
+            delegate?.didSignup(username: username, password: password)
+        }
     }
     
     func goToSignup(sender:AnyObject) {
         guard let password = passwordField.text else {noPassword();return}
         guard let name = usernameField.text else {noUsername();return}
         guard let email = emailField.text else {noEmail();return}
+        self.showLoadingScreen()
         SignupAPI.signup(username: name, password: password, email:email, completion: {done in
             DispatchQueue.main.async {
-                if done == "Success" {
+                self.removeLoadingScreen()
+                if done.0 == .success {
+                    self.signupInfo = SignupInfo(username: name, password: password)
                     self.success()
                     KCModel.setInfo(username: name, password: password)
                     return
                 } else {
-                    self.error(message: done ?? "Error")
+                    self.error(message: done.1 ?? "Error")
                     return
                 }
             }
@@ -63,7 +85,7 @@ class SignupController:ShadowController {
     }
     
     func success() {
-        self.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
     func error(message:String) {
@@ -74,6 +96,6 @@ class SignupController:ShadowController {
     }
     
     func closeController(sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }

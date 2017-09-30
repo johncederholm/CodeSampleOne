@@ -12,9 +12,19 @@ class TeamModel {
     let name:String
     let id:String
     let isOut:Bool
-    init(name:String, id:String, isOut:Bool) {
+    let isPicked:Bool
+    let teamName:String?
+    let currentWeek:String
+    init(name:String, id:String, isOut:Bool, isPicked:Bool, currentWeek:String, teamName:String?) {
         self.name = name
         self.id = id
         self.isOut = isOut
+        self.isPicked = isPicked
+        self.currentWeek = currentWeek
+        if let teamName = teamName {
+            self.teamName = NFLModel.getTeam(teamNumber: teamName).name
+        } else {
+            self.teamName = teamName
+        }
     }
 }

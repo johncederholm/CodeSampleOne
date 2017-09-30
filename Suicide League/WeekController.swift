@@ -20,6 +20,7 @@ class WeekController:ShadowController {
     @IBOutlet weak var arrowView: UIImageView!
     @IBOutlet weak var weekTableView: UITableView!
     @IBOutlet weak var weekSelector: UIView!
+    @IBOutlet weak var pickLabel: UILabel!
     var delegate:WeekControllerDelegate?
     var weeks:[WeekModel]?
     var picker:UIPickerView!
@@ -42,24 +43,35 @@ class WeekController:ShadowController {
         picker.delegate = self
         pickerButton = UIButton()
         pickerButton.setTitle("Done", for: .normal)
-        pickerButton.backgroundColor = UIColor.blue
-        picker.backgroundColor = .purple
+        pickerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#296609")
+        picker.backgroundColor = UIColor.lightGray
         pickerButton.addTarget(self, action: #selector(WeekController.selectRow(sender:)), for: .touchUpInside)
+        teamLabel.text = delegate?.getTeam().name
+        pickLabel.text = "Loading"
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadSchedule(week: "1")
+        guard let cw = delegate?.getTeam().currentWeek else {return}
+        loadSchedule(week: cw)
     }
     
     func loadSchedule(week:String) {
         guard let team = delegate?.getTeam() else {return}
         selectedWeek = week
         weekLabel.text = "Week " + week
+        self.showLoadingScreen()
         WeekAPI.getLeagueObjects(week: week, completion: {models in
             self.weeks = models
             PickAPI.getPick(tid: team.id, week: week, completion: {pick in
-                self.pick = pick
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
+                    self.removeLoadingScreen()
+                    self.pick = pick
+                    if let pick = pick {
+                        let teamName = NFLModel.getTeam(teamNumber: pick.teamNumber).name
+                        self.pickLabel.text = "Current Pick: \(teamName)"
+                    } else {
+                        self.pickLabel.text = "No Pick"
+                    }
                     self.weekTableView.reloadData()
                 }
             })
@@ -79,15 +91,17 @@ class WeekController:ShadowController {
         tapView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.view.addSubview(tapView)
         let vb = self.view.bounds
-        let height = vb.height / 3
-        let tab = self.tabBarController?.tabBar.frame.height ?? 0
-        let x:CGFloat = 0
-        let y = vb.height - height - tab
         let buttonHeight:CGFloat = 40
         self.view.addSubview(picker)
         self.view.addSubview(pickerButton)
+        
         picker.frame.origin = CGPoint(x: 0, y: vb.height)
+        picker.frame.size.width = vb.width
+        let x:CGFloat = 0
+        let y = vb.height - picker.frame.size.height
         pickerButton.frame = CGRect(x: 0, y: vb.height, width: vb.width, height: buttonHeight)
+        let currentWeek = (self.usableWeeks ?? []).index(of: self.selectedWeek ?? "1") ?? 0
+        self.picker.selectRow(currentWeek, inComponent: 0, animated: false)
         self.view.bringSubview(toFront: picker)
         self.view.bringSubview(toFront: pickerButton)
         UIView.animate(withDuration: 0.2, animations: {animation in
@@ -125,6 +139,13 @@ class WeekController:ShadowController {
             weekArray.append(String(i))
         }
         return weekArray
+    }
+    
+    func showMessage(message:String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -168,7 +189,7 @@ extension WeekController:UITableViewDataSource {
     }
 }
 
-extension WeekController:UIPickerViewDataSource {
+extension WeekController:UIPickerViewDataSource {    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return usableWeeks.count
     }
@@ -190,20 +211,33 @@ extension WeekController:UIPickerViewDelegate {
 
 extension WeekController:WeekCellDelegate {
     func didSelect(button cell: WeekCell, team: String) {
+        if let currentWeek = self.delegate?.getTeam().currentWeek {
+            guard let selectedWeek = self.selectedWeek else {return}
+            guard let cw = Int(currentWeek) else {return}
+            guard let sw = Int(selectedWeek) else {return}
+            if cw > sw {
+                return
+            }
+        }
         guard let sw = self.selectedWeek else {return}
         guard let l = self.delegate?.getLeague() else {return}
         guard let tid = self.delegate?.getTeam().id else {return}
         let t = NFLModel.getTeam(teamNumber: team)
         let u = LoginAPI.shared.UID
-        let alertM = "Do you want to select \(t.name.replaceAll(of: "\n", with: " ")) in Week \(sw)?"
+        let alertM = "Do you want to select \(t.name.replacingOccurrences(of: "\n", with: " ")) in Week \(sw)?"
         let alert = UIAlertController(title: "Make Pick?",
                                       message: alertM,
                                       preferredStyle: .alert)
         let yes = UIAlertAction(title: "Yes", style: .default, handler: {done in
+            self.showLoadingScreen()
             PickAPI.makePick(uid: u, lid: l.lid, tid: tid, pick: t.id, pickweek: sw, completion: {completion in
-                print(completion)
                 DispatchQueue.main.async {
-                    self.loadSchedule(week: self.selectedWeek)
+                    self.removeLoadingScreen()
+                    if let message = completion.1 {
+                        self.showMessage(message: message)
+                    } else {
+                        self.loadSchedule(week: self.selectedWeek)
+                    }
                 }
             })
         })

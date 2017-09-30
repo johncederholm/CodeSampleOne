@@ -23,7 +23,9 @@ class OptionsController:ShadowController {
     
     func logout() {
         LoginAPI.shared.logout(completion: {done in
-            
+            DispatchQueue.main.async {
+                _ = self.navigationController?.popViewController(animated: true)
+            }
         })
     }
 }

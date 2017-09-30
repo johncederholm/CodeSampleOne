@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 
 class StandingsModel {
-    var inTeamName:String?
-    var outTeamName:String?
-    
-    init(inTeamName:String?, outTeamName:String?) {
+    var inTeamName:(String?, Bool?)
+    var outTeamName:(String?, Bool?)
+    init(inTeamName:(String?, Bool?), outTeamName:(String?, Bool?)) {
         self.inTeamName = inTeamName
         self.outTeamName = outTeamName
     }

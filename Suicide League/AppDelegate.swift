@@ -7,11 +7,24 @@
 //
 
 import UIKit
-let prefix = "http://suicideleague/v6/"
+import GoogleMobileAds
+
+typealias Test = String
+typealias RealTimeString = String
+let prefix = "https://suicideleague.com/v6/"
+//let prefix = "https://suicideleague.com/dev_v6/"
 //let prefix = "http://localhost:8888/"
-var textFontBold:String = "Helvetica"
+var textFontBold:String = "Helvetica-Bold"
 var textFont:String = "Helvetica"
 var buttonBold:String = "Helvetica"
+let adString = "ca-app-pub-1773642246345115/1212812196"
+let testAd = "ca-app-pub-3940256099942544/2934735716"
+let testInterstitial = "ca-app-pub-3940256099942544/4411468910"
+let realInterstitial = "ca-app-pub-1773642246345115/5403338642"
+
+enum UserDefKeys:String {
+    case disclaimer = "disclaimer"
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "header")!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().toolbarManageBehaviour = IQAutoToolbarManageBehaviour.byTag
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 50
+        UIApplication.shared.statusBarStyle = .lightContent
+//        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544/6300978111")
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-1773642246345115~6361197098")
+
         return true
     }
 

@@ -15,8 +15,7 @@ class WeekAPI {
         request.httpMethod = "POST"
         let bodyData = "Week=\(week)"
         request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {completion(nil);return}
+        FailableTask.run(u: url, mt: "POST", b: bodyData, r: 3, s: URLSession.shared, suc: {data in
             guard let results = Serializer.serializeDataArray(data: data).completion else {completion(nil); return}
             var weeks = [WeekModel]()
             for r in results {
@@ -44,7 +43,8 @@ class WeekAPI {
                 weeks.append(w)
             }
             completion(weeks)
+        }, fa: {failure in
+            completion(nil)
         })
-        task.resume()
     }
 }

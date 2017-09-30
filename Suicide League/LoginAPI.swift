@@ -8,45 +8,71 @@
 
 import Foundation
 
+enum LoginResponse:String {
+    case success = "200"
+    case email = "300"
+    case noResponse = "301"
+    case needsDisclaimer = "302"
+    case noUsername = "405"
+    case noPassword = "406"
+}
+
 class LoginAPI {
     static let shared = LoginAPI()
     var UID = String()
-    func login(username:String, password:String, completion: @escaping (String?) -> ()) {
+    func login(username:String, password:String, isDisclaimer:Bool, completion: @escaping (String?, LoginResponse?) -> ()) {
         let url:URL = URL(string: prefix + "MobileLogin.php")!
         var request:URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
-        let bodyData = "username=\(username)&password=\(password)&remember_me=false"
+        var bodyData = "username=\(username)&password=\(password)&remember_me=false"
+        if isDisclaimer == true {
+            bodyData.append("&disclaimer=0")
+        }
         request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {completion(nil); return}
-            print(String.init(data: data, encoding: .utf8))
+        
+        FailableTask.run(u: url, mt: "POST", b: bodyData, r: 3, s: URLSession.shared, suc: {data in
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    guard let UID = json["UID"] as? String else {completion(nil);return}
-                    LoginAPI.shared.UID = UID
-                    completion(UID)
+                    var message:String? = nil
+                    guard let resp = json["response"] as? String else {completion(nil, nil);return}
+                    guard let loginResponse = LoginResponse(rawValue: resp) else {completion(nil,nil);return}
+                    if let UID = json["UID"] as? String {
+                        LoginAPI.shared.UID = UID
+                        message = UID
+                    }
+                    if let disclaimer = json["disclaimer"] as? String {
+                        message = disclaimer
+                    }
+                    
+                    if loginResponse == LoginResponse.success {
+                        UserDefaults.standard.set("0", forKey: UserDefKeys.disclaimer.rawValue)
+                    } else {
+                        UserDefaults.standard.set("1", forKey: UserDefKeys.disclaimer.rawValue)
+                    }
+                    if loginResponse == LoginResponse.email {
+                        message = "Check your email and click the verification link."
+                    }
+                    completion(message, loginResponse)
                     return
                 } else {
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
             } catch {
-                completion(nil)
-                print(error.localizedDescription)
+                completion(nil, nil)
             }
+        }, fa: {error in
+            completion(nil, nil)
+            return
         })
-        task.resume()
     }
     
     func logout(completion:@escaping (Bool) -> ()) {
         let url:URL = URL(string: prefix + "MobileLogout.php")!
-        let request:URLRequest = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {completion(false); return}
-            print("DONE" + String.init(data: data, encoding: .utf8)!)
+        FailableTask.run(u: url, mt: "POST", b: "", r: 3, s: URLSession.shared, suc: {data in
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    guard let UID = json["response"] as? String else {completion(false);return}
+                    if json["response"] as? String == nil {completion(false);return}
                     LoginAPI.shared.UID = ""
                     completion(true)
                     return
@@ -56,26 +82,10 @@ class LoginAPI {
                 }
             } catch {
                 completion(false)
-                print(error.localizedDescription)
             }
+        }, fa: {failure in
+            completion(false)
+            return
         })
-        task.resume()
-    }
-    
-    class func getLeagues(UID: String, completion: (String) -> ()) {
-//        let url:URL = URL(string: prefix + "MobileTeams.php")!
-//        let url:URL = URL(string: prefix + "MobileWeeks.php")!
-        let url:URL = URL(string: prefix + "MobilePoints.php")!
-        var request:URLRequest = URLRequest(url: url)
-        request.httpMethod = "POST"
-//        let bodyData = "UID=\(UID)"
-        let bodyData = "LID=299"
-        request.httpBody = bodyData.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            guard let data = data else {return}
-            
-            let result = Serializer.serializeDataArray(data: data)
-        })
-        task.resume()
     }
 }

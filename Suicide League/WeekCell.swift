@@ -46,9 +46,9 @@ class WeekCell:UITableViewCell {
         rightTeamLabel.backgroundColor = UIColor.clear
         if let pick = pick {
             if pick.teamNumber == model.leftN {
-                leftTeamLabel.backgroundColor = UIColor.red
+                leftTeamLabel.backgroundColor = UIColor.hexStringToUIColor(hex: "#296609")
             } else if pick.teamNumber == model.rightN {
-                rightTeamLabel.backgroundColor = UIColor.red
+                rightTeamLabel.backgroundColor = UIColor.hexStringToUIColor(hex: "#296609")
             }
         }
     }

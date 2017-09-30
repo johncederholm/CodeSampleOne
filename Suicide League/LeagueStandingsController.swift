@@ -44,7 +44,7 @@ extension LeagueStandingsController:UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20
+        return 35
     }
 }
 
