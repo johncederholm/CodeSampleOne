@@ -50,7 +50,7 @@ class LeagueController:ShadowController {
     
     func determineAd() {
         if self.showInterstitial {
-            createAd()
+//            createAd()
         } else {
             self.showInterstitial = true
         }

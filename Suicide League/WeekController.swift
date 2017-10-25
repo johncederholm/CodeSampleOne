@@ -216,7 +216,7 @@ extension WeekController:WeekCellDelegate {
             guard let cw = Int(currentWeek) else {return}
             guard let sw = Int(selectedWeek) else {return}
             if cw > sw {
-                return
+//                return
             }
         }
         guard let sw = self.selectedWeek else {return}

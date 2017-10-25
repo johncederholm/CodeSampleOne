@@ -42,7 +42,6 @@ private struct RequestWithRetry {
                     self.currentRetry += 1
                     self.failureCallback(RepetitiveTaskError.RetryFailed(self.currentRetry))
                 } else {
-                    print("retry!")
                     self.run(transientTask: transientTask)
                 }
             }

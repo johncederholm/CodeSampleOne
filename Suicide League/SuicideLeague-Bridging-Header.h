@@ -11,7 +11,7 @@
 #import <libxml/xpath.h>
 #import <libxml/xpathInternals.h>
 #import <libxml/xmlerror.h>
-
+#include <MacTypes.h>
 static inline UInt32 xmlElementTypeToInt(xmlElementType type) {
     return (UInt32) type;
 }
