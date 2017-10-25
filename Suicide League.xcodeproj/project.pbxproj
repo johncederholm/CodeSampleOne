@@ -43,13 +43,11 @@
 		1666A7851F3E7A950094568F /* PointsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7841F3E7A950094568F /* PointsAPI.swift */; };
 		1666A7871F3E7B250094568F /* PointsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7861F3E7B250094568F /* PointsModel.swift */; };
 		1666A7891F3E83CE0094568F /* PointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7881F3E83CE0094568F /* PointsController.swift */; };
-		1666A78C1F3E89B50094568F /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A78B1F3E89B50094568F /* GenericViewController.swift */; };
 		1666A78E1F3E90CC0094568F /* PointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A78D1F3E90CC0094568F /* PointsCell.swift */; };
 		1666A7901F3FAD7A0094568F /* PickAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A78F1F3FAD7A0094568F /* PickAPI.swift */; };
 		1666A7921F40DE280094568F /* PickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7911F40DE280094568F /* PickModel.swift */; };
 		1666A7941F419AEC0094568F /* StandingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7931F419AEC0094568F /* StandingsModel.swift */; };
 		1666A7961F41A27A0094568F /* StandingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666A7951F41A27A0094568F /* StandingsCell.swift */; };
-		1678C8DE1F7C800E00070D64 /* InterstitialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1678C8DD1F7C800E00070D64 /* InterstitialDelegate.swift */; };
 		16BC0CE91F36BFCD0056B638 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BC0CD31F36BFCD0056B638 /* IQNSArray+Sort.swift */; };
 		16BC0CEA1F36BFCD0056B638 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BC0CD41F36BFCD0056B638 /* IQUIScrollView+Additions.swift */; };
 		16BC0CEB1F36BFCD0056B638 /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BC0CD51F36BFCD0056B638 /* IQUITextFieldView+Additions.swift */; };
@@ -180,7 +178,6 @@
 		1666A7841F3E7A950094568F /* PointsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsAPI.swift; sourceTree = "<group>"; };
 		1666A7861F3E7B250094568F /* PointsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsModel.swift; sourceTree = "<group>"; };
 		1666A7881F3E83CE0094568F /* PointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsController.swift; sourceTree = "<group>"; };
-		1666A78B1F3E89B50094568F /* GenericViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		1666A78D1F3E90CC0094568F /* PointsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsCell.swift; sourceTree = "<group>"; };
 		1666A78F1F3FAD7A0094568F /* PickAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickAPI.swift; sourceTree = "<group>"; };
 		1666A7911F40DE280094568F /* PickModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickModel.swift; sourceTree = "<group>"; };
@@ -189,7 +186,6 @@
 		167780FC1F369BA700E38E27 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		167780FD1F369BA700E38E27 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		167781001F369F5700E38E27 /* SuicideLeague-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SuicideLeague-Bridging-Header.h"; sourceTree = "<group>"; };
-		1678C8DD1F7C800E00070D64 /* InterstitialDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialDelegate.swift; sourceTree = "<group>"; };
 		16BC0CD31F36BFCD0056B638 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		16BC0CD41F36BFCD0056B638 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
 		16BC0CD51F36BFCD0056B638 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
@@ -306,8 +302,8 @@
 				1666A7841F3E7A950094568F /* PointsAPI.swift */,
 				16D1E9E51F3DA11A0017B0E4 /* WeekAPI.swift */,
 				16080C6A1F4238BC00B7C1DC /* SignupAPI.swift */,
-				16FF05E01F58F0B10025835E /* RepetitiveTask */,
 				1666A78F1F3FAD7A0094568F /* PickAPI.swift */,
+				16FF05E01F58F0B10025835E /* RepetitiveTask */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -402,14 +398,12 @@
 				16080C6C1F42843000B7C1DC /* OptionsController.swift */,
 				162D2D991F2D4DEA00859AD0 /* SignupController.swift */,
 				160984961F37E49C0038D06C /* API */,
-				1678C8DC1F7C7FF900070D64 /* Delegates */,
 				16EF1B5D1F34483A00D9E227 /* DoAlertController */,
 				16EF1B0C1F33ECA600D9E227 /* DataModels */,
 				1666A77F1F3E25FD0094568F /* Delegates */,
 				162D2DDC1F2D9ED100859AD0 /* SubControllers */,
 				160EB0A51F589C430007CD0D /* Extensions */,
 				162D2DE31F2DA5F800859AD0 /* Subviews */,
-				1666A78A1F3E89A10094568F /* Generics */,
 				162D2DB11F2D579300859AD0 /* IQKeyboardManagerSwift */,
 				16080C651F422A9600B7C1DC /* Misc */,
 				16EF1B111F34471A00D9E227 /* NVAIndicatorView */,
@@ -450,14 +444,6 @@
 			name = Delegates;
 			sourceTree = "<group>";
 		};
-		1666A78A1F3E89A10094568F /* Generics */ = {
-			isa = PBXGroup;
-			children = (
-				1666A78B1F3E89B50094568F /* GenericViewController.swift */,
-			);
-			name = Generics;
-			sourceTree = "<group>";
-		};
 		167780FB1F369BA700E38E27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,14 +451,6 @@
 				167780FD1F369BA700E38E27 /* libxml2.tbd */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1678C8DC1F7C7FF900070D64 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				1678C8DD1F7C800E00070D64 /* InterstitialDelegate.swift */,
-			);
-			name = Delegates;
 			sourceTree = "<group>";
 		};
 		16BC0CD21F36BFCD0056B638 /* Categories */ = {
@@ -678,7 +656,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "d2i LLC";
 				TargetAttributes = {
 					165213CA1F2D3E3C00C41E9B = {
@@ -773,7 +751,6 @@
 				16EF1BA01F344AA800D9E227 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */,
 				16BC0CF11F36BFCD0056B638 /* IQKeyboardManager.swift in Sources */,
 				16BC0CED1F36BFCD0056B638 /* IQUIViewController+Additions.swift in Sources */,
-				1678C8DE1F7C800E00070D64 /* InterstitialDelegate.swift in Sources */,
 				1666A78E1F3E90CC0094568F /* PointsCell.swift in Sources */,
 				16EF1B9B1F344AA800D9E227 /* NVActivityIndicatorAnimationBallScaleRipple.swift in Sources */,
 				16EF1BAB1F344AA800D9E227 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
@@ -846,7 +823,6 @@
 				1666A7921F40DE280094568F /* PickModel.swift in Sources */,
 				16EF1BA31F344AA800D9E227 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
 				16634BC61F3D761200EC9774 /* TeamAPI.swift in Sources */,
-				1666A78C1F3E89B50094568F /* GenericViewController.swift in Sources */,
 				16EF1BA91F344AA800D9E227 /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				16EF1BAC1F344AA800D9E227 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				1666A7871F3E7B250094568F /* PointsModel.swift in Sources */,
@@ -914,13 +890,16 @@
 		165213F31F2D3E3C00C41E9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -928,7 +907,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -965,13 +948,16 @@
 		165213F41F2D3E3C00C41E9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -979,7 +965,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
